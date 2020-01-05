@@ -1,10 +1,17 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import Users from './user/pages/Users'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path='/' >
+          <Users/>
+        </Route>
+        <Redirect to='/'/>
+      </Switch>
+    </Router>
   );
 }
 
