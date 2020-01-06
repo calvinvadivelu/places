@@ -1,6 +1,6 @@
-import React from './node_modules/react';
+import React from 'react';
 
-import './UsersList.scss'
+import './UsersList.css';
 import UserItem from '../UserItem/UserItem';
 
 const UsersList = props => {
@@ -13,9 +13,9 @@ const UsersList = props => {
     }
 
     return (
-        <ul>
-            {props.items.map(item => 
-                <UserItem key={user.id} id={user.id} name={user.name} placeCount = {user.places} />
+        <ul className='users-list'>
+            {props.items.map(user => 
+                <UserItem key={user.id} id={user.id} name={user.name} image={user.image} placeCount = {user.places} />
             )}
         </ul>
     )
