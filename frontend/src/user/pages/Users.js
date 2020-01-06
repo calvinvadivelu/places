@@ -1,5 +1,7 @@
 import React from 'react';
+
 import UserList from  '../components/UsersList/UsersList'
+
 const Users = () => {
     const USERS = [
         {
