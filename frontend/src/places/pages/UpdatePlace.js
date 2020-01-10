@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import Input from '../../shared/components/FormElements/Input'
-import Button from '../../shared/components/FormElements/Button'
-import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../shared/util/validators'
+import Input from '../../shared/components/FormElements/Input';
+import Card from '../../shared/components/UIElements/Card';
+import Button from '../../shared/components/FormElements/Button';
+import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../shared/util/validators';
 import { useForm } from '../../shared/hooks/form-hook';
 import "./PlaceForm.css";
 
@@ -22,7 +23,7 @@ const DUMMY_PLACES = [
     },
     {
       id: 'p2',
-      title: 'Empire State Building',
+      title: 'Em State Building',
       description: 'One of the most famous sky scrapers in the world!',
       imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/NYC_Empire_State_Building.jpg/640px-NYC_Empire_State_Building.jpg',
       address: '20 W 34th St, New York, NY 10001',
@@ -52,21 +53,27 @@ const UpdatePlace = () => {
   }, false)
   
   useEffect(() => {
-    setFormData({
-      title:{
-        value: currentPlace.title,
-        isValid: true
-      },
-      description:{
-        value: currentPlace.description,
-        isValid: true
-      }
-    } , true)
+    if (currentPlace){
+      setFormData({
+        title:{
+          value: currentPlace.title,
+          isValid: true
+        },
+        description:{
+          value: currentPlace.description,
+          isValid: true
+        }
+      } , true)
+    }
   }, [setFormData, currentPlace])
 
   if (!currentPlace) {
     return (
-      <div className="center">Could Not Find The Place</div>
+      <div className="center">
+        <Card>
+          Could Not Find The Place
+        </Card>
+      </div>
     )
   }
 
@@ -75,7 +82,7 @@ const UpdatePlace = () => {
     event.preventDefault();
     console.log(formState.inputs);
   }
-  
+
   return (
   formState.inputs.title.value && (
 
