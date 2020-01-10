@@ -7,9 +7,11 @@ import Modal from '../../shared/components/UIElements/Modal';
 import Map from  '../../shared/components/UIElements/Map';
 const PlaceItem = props => {
     const [showMap, setShowMap] = useState(false);
-
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
     const openMapHandler = () => setShowMap(true)
     const closeMapHandler = () => setShowMap(false)
+    const openDeleteModal = () => setShowConfirmModal(true)
+    const closeDeleteModal = () => setShowConfirmModal(false)
     return (
       <>
         <Modal
@@ -23,6 +25,20 @@ const PlaceItem = props => {
             <div className="map-container">
                 <Map center={props.coordinates} zoom={16}></Map>
             </div>
+        </Modal>
+        <Modal
+        show={showConfirmModal}
+        onCancel={closeDeleteModal}
+        header="Are you sure?"
+        footerClass='place-item__modal-actions'
+        footer={
+          <>
+            <Button inverse onClick={closeDeleteModal}>CANCEL</Button>
+            <Button danger>DELETE</Button>
+          </>
+        }
+        >
+          <p>Are you sure you want to delete this place?</p>
         </Modal>
         <li className="place-item">
           <Card className="place-item__content">
@@ -39,7 +55,7 @@ const PlaceItem = props => {
                 VIEW ON MAP
               </Button>
               <Button to={`/places/${props.id}`}>EDIT</Button>
-              <Button danger>DELETE</Button>
+              <Button danger onClick={openDeleteModal}>DELETE</Button>
             </div>
           </Card>
         </li>
